@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:pic_translate/enums/enums.dart';
 import 'package:pic_translate/main.dart';
 import 'package:pic_translate/resources/resources.dart';
@@ -31,13 +32,7 @@ class LanguageDropdownState extends State<LanguageDropdown> {
         ), // Label before the dropdown
         DropdownButton<Languages>(
           value: _selectedLanguage,
-          onChanged: (Languages? newLanguage) {
-            appData.currentLanguage = newLanguage!;
-            setState(() {
-              _selectedLanguage = newLanguage;
-            });
-            // Handle language selection (e.g., update translation logic)
-          },
+          onChanged: onChanged,
           items: Languages.values.map((Languages language) {
             return DropdownMenuItem<Languages>(
               value: language,
@@ -50,5 +45,14 @@ class LanguageDropdownState extends State<LanguageDropdown> {
         ),
       ],
     );
+  }
+
+  onChanged(Languages? newLanguage) async {
+    appData.currentLanguage = newLanguage!;
+    setState(() {
+      _selectedLanguage = newLanguage;
+    });
+    const storage = FlutterSecureStorage();
+    await storage.write(key: 'currentLanguage', value: newLanguage.name);
   }
 }
