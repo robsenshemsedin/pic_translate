@@ -5,7 +5,8 @@ import 'package:pic_translate/models/models.dart';
 import 'package:pic_translate/resources/resources.dart';
 
 class AppData {
-  Languages currentLanguage = Languages.Arabic;
+  AppData({required this.currentLanguage});
+  Languages currentLanguage;
   GenerativeModel model =
       GenerativeModel(model: 'gemini-pro-vision', apiKey: geminiAPI);
   Uint8List? imageData;
