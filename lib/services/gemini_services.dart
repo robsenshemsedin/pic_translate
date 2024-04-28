@@ -6,7 +6,7 @@ import 'package:pic_translate/resources/resources.dart';
 class GeminiServices {
   static Future<Item?> getItem() async {
     final prompt = TextPart(AppStrings.textPrompt);
-    final dataPart = DataPart('image/jpeg', appData.imageData!);
+    final dataPart = DataPart(AppStrings.mimeType, appData.imageData!);
     final response = await appData.model.generateContent([
       Content.multi([prompt, dataPart])
     ]);
