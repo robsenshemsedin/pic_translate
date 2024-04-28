@@ -68,6 +68,8 @@ class _ImagePickerCardState extends State<ImagePickerCard> {
     });
     if (!context.mounted) return;
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => const DetailPage()));
+        // ignore: use_build_context_synchronously
+        context,
+        MaterialPageRoute(builder: (context) => const DetailPage()));
   }
 }
